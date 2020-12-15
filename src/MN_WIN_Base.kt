@@ -1,11 +1,17 @@
+import org.lwjgl.glfw.Callbacks
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.glfw.GLFWVidMode
+import org.lwjgl.opengl.GL
+import org.lwjgl.opengl.GL11
 import org.lwjgl.system.MemoryUtil
+import org.lwjgl.system.MemoryUtil.NULL
 
-class MN_WIN_Init {
+open class MN_WIN_Base {
+
+    var mn_window :Long = NULL
+
     fun Init(): Long { //GLFW 초기화 함수
-        println("MN_Init")
         GLFWErrorCallback.createPrint(System.err).set()
 
         if (!GLFW.glfwInit()) //GLFW 초기화
@@ -18,7 +24,7 @@ class MN_WIN_Init {
 
         val vidmode : GLFWVidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor())!!
 
-        val mn_window = GLFW.glfwCreateWindow(
+        mn_window = GLFW.glfwCreateWindow(  //window 크기, 제목, 모드 설정
             vidmode.width() / 3,
             vidmode.height() / 3,
             "MN Window!",
@@ -28,16 +34,18 @@ class MN_WIN_Init {
         if(mn_window == MemoryUtil.NULL)   //hs_window error
             throw RuntimeException("GLFW window 생성에 실패함")
 
-        var ESCAPE_KeyCallback = fun(window :Long, key :Int, scancode: Int, action: Int, mod: Int) {
-            if((key == GLFW.GLFW_KEY_ESCAPE) && (action == GLFW.GLFW_RELEASE)) //esc 버튼을 눌렀을때 꺼짐
-                GLFW.glfwSetWindowShouldClose(window, true)
-        }
-
-        GLFW.glfwSetKeyCallback(mn_window, ESCAPE_KeyCallback) //Callback 설정
-
         GLFW.glfwMakeContextCurrent(mn_window)
         GLFW.glfwSwapInterval(1) //Enable v-sync
         GLFW.glfwShowWindow(mn_window)
         return mn_window
+    }
+
+
+    fun Destroy (){
+        Callbacks.glfwFreeCallbacks(mn_window)
+        GLFW.glfwDestroyWindow(mn_window)
+
+        GLFW.glfwTerminate()
+        GLFW.glfwSetErrorCallback(null)!!.free()
     }
 }
