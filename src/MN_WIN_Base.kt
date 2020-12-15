@@ -2,16 +2,14 @@ import org.lwjgl.glfw.Callbacks
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.glfw.GLFWVidMode
-import org.lwjgl.opengl.GL
-import org.lwjgl.opengl.GL11
 import org.lwjgl.system.MemoryUtil
 import org.lwjgl.system.MemoryUtil.NULL
 
 open class MN_WIN_Base {
-
     var mn_window :Long = NULL
 
     fun Init(): Long { //GLFW 초기화 함수
+        //println("Hello Init")
         GLFWErrorCallback.createPrint(System.err).set()
 
         if (!GLFW.glfwInit()) //GLFW 초기화
@@ -37,11 +35,13 @@ open class MN_WIN_Base {
         GLFW.glfwMakeContextCurrent(mn_window)
         GLFW.glfwSwapInterval(1) //Enable v-sync
         GLFW.glfwShowWindow(mn_window)
+
         return mn_window
     }
 
 
     fun Destroy (){
+        //println("Hello Destroy")
         Callbacks.glfwFreeCallbacks(mn_window)
         GLFW.glfwDestroyWindow(mn_window)
 
