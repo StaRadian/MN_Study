@@ -8,7 +8,7 @@ fun main(){
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
 
-    var win : Long = glfwCreateWindow(640, 480, "Hello", 0,0)
+    var win : Long = glfwCreateWindow(600, 600, "Hello", 0,0)
 
     glfwShowWindow(win)
 
@@ -16,9 +16,9 @@ fun main(){
 
     GL.createCapabilities()
 
-    var color_red : Float = 1f;
-    var color_blue : Float = 0f;
+    glEnable(GL_TEXTURE_2D)
 
+    val tex = HS_texture("./res/awesomeface.png")
 
     while (!glfwWindowShouldClose(win)){
         if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
@@ -29,11 +29,20 @@ fun main(){
 
         glClear(GL_COLOR_BUFFER_BIT)
 
+        tex.bind()
+
         glBegin(GL_QUADS)
-        glColor4f(color_red,0f,color_blue, 0f)
+
+        glTexCoord2f(0f,0f)
         glVertex2f(-0.5f, 0.5f)
+
+        glTexCoord2f(1f,0f)
         glVertex2f(0.5f, 0.5f)
+
+        glTexCoord2f(1f,1f)
         glVertex2f(0.5f, -0.5f)
+
+        glTexCoord2f(0f,1f)
         glVertex2f(-0.5f, -0.5f)
         glEnd()
 
