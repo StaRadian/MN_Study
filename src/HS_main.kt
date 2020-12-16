@@ -8,7 +8,7 @@ fun main(){
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
 
-    var win : Long = glfwCreateWindow(600, 600, "Hello", 0,0)
+    var win : Long = glfwCreateWindow(640, 480, "Hello", 0,0)
 
     glfwShowWindow(win)
 
@@ -18,7 +18,31 @@ fun main(){
 
     glEnable(GL_TEXTURE_2D)
 
+    val vertices = floatArrayOf(
+        -0.5f , 0.5f , 0f ,    //Top LEFT
+        0.5f, 0.5f, 0f,         //Top RIGHT
+        0.5f, -0.5f, 0f,        //BOTTOM RIGHT
+
+        0.5f, -0.5f, 0f,        //BOTTOM RIGHT
+        -0.5f, -0.5f, 0f,         //Top RIGHT
+        -0.5f , 0.5f , 0f ,    //Top LEFT
+
+    )
+
+    val texture = floatArrayOf(
+        0f,0f,
+        1f,0f,
+        1f,1f,
+
+        1f,1f,
+        0f,1f,
+        0f,0f
+    )
+
+    val model = HS_Model(vertices, texture)
+
     val tex = HS_texture("./res/awesomeface.png")
+
 
     while (!glfwWindowShouldClose(win)){
         if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
@@ -31,20 +55,7 @@ fun main(){
 
         tex.bind()
 
-        glBegin(GL_QUADS)
-
-        glTexCoord2f(0f,0f)
-        glVertex2f(-0.5f, 0.5f)
-
-        glTexCoord2f(1f,0f)
-        glVertex2f(0.5f, 0.5f)
-
-        glTexCoord2f(1f,1f)
-        glVertex2f(0.5f, -0.5f)
-
-        glTexCoord2f(0f,1f)
-        glVertex2f(-0.5f, -0.5f)
-        glEnd()
+        model.render()
 
         glfwSwapBuffers(win)
     }
