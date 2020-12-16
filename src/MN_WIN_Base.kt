@@ -33,7 +33,7 @@ open class MN_WIN_Base {
             throw RuntimeException("GLFW window 생성에 실패함")
 
         GLFW.glfwMakeContextCurrent(mn_window)
-        GLFW.glfwSwapInterval(1) //Enable v-sync
+        GLFW.glfwSwapInterval(1) //Enable v-sync (60fps)
         GLFW.glfwShowWindow(mn_window)
 
         return mn_window
