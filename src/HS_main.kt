@@ -19,13 +19,10 @@ fun main(){
     glEnable(GL_TEXTURE_2D)
 
     val vertices = floatArrayOf(
-        -0.5f , 0.5f , 0f ,    //Top LEFT
-        0.5f, 0.5f, 0f,         //Top RIGHT
-        0.5f, -0.5f, 0f,        //BOTTOM RIGHT
-
-        0.5f, -0.5f, 0f,        //BOTTOM RIGHT
-        -0.5f, -0.5f, 0f,         //Top RIGHT
-        -0.5f , 0.5f , 0f ,    //Top LEFT
+        -0.5f , 0.5f , 0f ,     //Top LEFT      0
+        0.5f, 0.5f, 0f,         //Top RIGHT     1
+        0.5f, -0.5f, 0f,        //BOTTOM RIGHT  2
+        -0.5f, -0.5f, 0f,       //BOTTOM LEFT   3
 
     )
 
@@ -33,13 +30,15 @@ fun main(){
         0f,0f,
         1f,0f,
         1f,1f,
-
-        1f,1f,
-        0f,1f,
-        0f,0f
+        0f,1f
     )
 
-    val model = HS_Model(vertices, texture)
+    val indices = intArrayOf(
+        0,1,2,
+        2,3,0
+    )
+
+    val model = HS_Model(vertices, texture, indices)
 
     val tex = HS_texture("./res/awesomeface.png")
 
