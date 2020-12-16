@@ -39,8 +39,8 @@ fun main(){
     )
 
     val model = HS_Model(vertices, texture, indices)
-
-    val tex = HS_texture("./res/awesomeface.png")
+    val shader = Shader("shader")
+    //val tex = HS_texture("./res/awesomeface.png")
 
 
     while (!glfwWindowShouldClose(win)){
@@ -52,7 +52,8 @@ fun main(){
 
         glClear(GL_COLOR_BUFFER_BIT)
 
-        tex.bind()
+        //tex.bind()
+        shader.bind()
 
         model.render()
 
