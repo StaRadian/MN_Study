@@ -16,27 +16,23 @@ fun main(){
 
     GL.createCapabilities()
 
-    var x : Float = 0f;
+    var color_red : Float = 1f;
+    var color_blue : Float = 0f;
 
 
     while (!glfwWindowShouldClose(win)){
-        if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
-            x += 0.001f
-        }
+        if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) { }
 
         glfwPollEvents()
 
         glClear(GL_COLOR_BUFFER_BIT)
 
         glBegin(GL_QUADS)
-        glColor4f(1f,0f,0f, 0f)
-        glVertex2f(-0.5f+x, 0.5f)
-        glColor4f(0f,1f,0f, 0f)
-        glVertex2f(0.5f+x, 0.5f)
-        glColor4f(0f,0f,1f, 0f)
-        glVertex2f(0.5f+x, -0.5f)
-        glColor4f(1f,1f,1f, 0f)
-        glVertex2f(-0.5f+x, -0.5f)
+        glColor4f(color_red,0f,color_blue, 0f)
+        glVertex2f(-0.5f, 0.5f)
+        glVertex2f(0.5f, 0.5f)
+        glVertex2f(0.5f, -0.5f)
+        glVertex2f(-0.5f, -0.5f)
         glEnd()
 
         glfwSwapBuffers(win)
