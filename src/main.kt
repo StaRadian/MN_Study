@@ -5,7 +5,7 @@ name:이호성
  */
 
 fun main(){
-    println("The World!")
+    println("MN World!")
     val Run = MN_Run()
     Run.Run()
 }
