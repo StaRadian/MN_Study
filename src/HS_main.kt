@@ -21,7 +21,9 @@ fun main(){
 
 
     while (!glfwWindowShouldClose(win)){
-        if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) { }
+        if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
+            glfwSetWindowShouldClose(win, true)
+        }
 
         glfwPollEvents()
 
