@@ -4,11 +4,12 @@ import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.glfw.GLFWVidMode
 import org.lwjgl.system.MemoryUtil
 import org.lwjgl.system.MemoryUtil.NULL
+import java.nio.IntBuffer
 
-open class MN_WIN_Base {
+abstract class MN_WIN_Base {
     var mn_window :Long = NULL
 
-    fun Init(): Long { //GLFW 초기화 함수
+    protected fun Base_Init() { //GLFW 초기화 함수
         //println("Hello Init")
         GLFWErrorCallback.createPrint(System.err).set()
 
@@ -16,31 +17,18 @@ open class MN_WIN_Base {
             throw IllegalStateException("GLFW 초기화 오류")
 
         GLFW.glfwDefaultWindowHints(); //기본 Hints로 초기화
+    }
 
-        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE) // 처음 창 보임, false
-        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_FALSE) // 창 크기 조절 가능, false
-
-        val vidmode : GLFWVidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor())!!
-
-        mn_window = GLFW.glfwCreateWindow(  //window 크기, 제목, 모드 설정
-            vidmode.width() / 3,
-            vidmode.height() / 3,
-            "MN Window!",
-            MemoryUtil.NULL, MemoryUtil.NULL
-        )
-
+    protected fun Base_Show_Init() {
         if(mn_window == MemoryUtil.NULL)   //hs_window error
             throw RuntimeException("GLFW window 생성에 실패함")
-
         GLFW.glfwMakeContextCurrent(mn_window)
         GLFW.glfwSwapInterval(1) //Enable v-sync (60fps)
         GLFW.glfwShowWindow(mn_window)
-
-        return mn_window
     }
 
 
-    fun Destroy (){
+    protected fun Base_Destroy (){
         //println("Hello Destroy")
         Callbacks.glfwFreeCallbacks(mn_window)
         GLFW.glfwDestroyWindow(mn_window)

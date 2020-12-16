@@ -6,5 +6,4 @@ class MN_Triangle:MN_WIN() {
     fun Shader() {
         
     }
-
 }
