@@ -1,6 +1,7 @@
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL15.*
+import org.lwjgl.opengl.GL20.*
 import java.nio.FloatBuffer
 
 class HS_Model (vertices : FloatArray, tex_coords : FloatArray, indices : IntArray) {
@@ -11,15 +12,14 @@ class HS_Model (vertices : FloatArray, tex_coords : FloatArray, indices : IntArr
     private var i_id : Int = 0
 
     init{
+        println("Hello HS_Model")
         draw_count = indices.size
 
         v_id = glGenBuffers()
-        println(v_id)
         glBindBuffer(GL_ARRAY_BUFFER, v_id)
         glBufferData(GL_ARRAY_BUFFER, createBuffer(vertices) , GL_STATIC_DRAW)
 
         t_id = glGenBuffers()
-        println(t_id)
         glBindBuffer(GL_ARRAY_BUFFER, t_id)
         glBufferData(GL_ARRAY_BUFFER, createBuffer(tex_coords) , GL_STATIC_DRAW)
 
@@ -37,14 +37,14 @@ class HS_Model (vertices : FloatArray, tex_coords : FloatArray, indices : IntArr
     }
 
     fun render() {
-        glEnableClientState(GL_VERTEX_ARRAY)
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY)
+        glEnableVertexAttribArray(0)
+        glEnableVertexAttribArray(1)
 
         glBindBuffer(GL_ARRAY_BUFFER, v_id)
-        GL11.glVertexPointer(3, GL_FLOAT,0,0)
+        glVertexAttribPointer(0,3, GL_FLOAT,false,0,0)
 
         glBindBuffer(GL_ARRAY_BUFFER, t_id)
-        GL11.glTexCoordPointer(2, GL_FLOAT, 0,0)
+        glVertexAttribPointer(1,2, GL_FLOAT,false,0,0)
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, i_id)
         GL11.glDrawElements(GL_TRIANGLES, draw_count, GL_UNSIGNED_INT, 0)
@@ -54,8 +54,8 @@ class HS_Model (vertices : FloatArray, tex_coords : FloatArray, indices : IntArr
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
         glBindBuffer(GL_ARRAY_BUFFER, 0)
 
-        glDisableClientState(GL_VERTEX_ARRAY)
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY)
+        glDisableVertexAttribArray(1)
+        glDisableVertexAttribArray(0)
     }
 
     private fun createBuffer (data : FloatArray) : FloatBuffer {

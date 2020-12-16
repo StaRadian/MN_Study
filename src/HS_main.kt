@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
 
 fun main(){
+    println("Hello")
     GLFWErrorCallback.createPrint()
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
@@ -40,8 +41,7 @@ fun main(){
 
     val model = HS_Model(vertices, texture, indices)
     val shader = Shader("shader")
-    //val tex = HS_texture("./res/awesomeface.png")
-
+    val tex = HS_texture("./res/awesomeface.png")
 
     while (!glfwWindowShouldClose(win)){
         if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
@@ -52,9 +52,11 @@ fun main(){
 
         glClear(GL_COLOR_BUFFER_BIT)
 
-        //tex.bind()
-        shader.bind()
 
+        shader.bind()
+        shader.setUniform("sampler",0)
+
+        tex.bind(0)
         model.render()
 
         glfwSwapBuffers(win)

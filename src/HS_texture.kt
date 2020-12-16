@@ -1,5 +1,5 @@
 import org.lwjgl.BufferUtils
-import org.lwjgl.opengl.GL11.*
+import org.lwjgl.opengl.GL13.*
 import java.io.File
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
@@ -10,6 +10,7 @@ class HS_texture(filename : String)  {
     private var width : Int = 0
     private var height : Int = 0
     init {
+        println("Hello texture")
         kotlin.runCatching {
             println("HS_tex")
             val bi: BufferedImage = ImageIO.read(File(filename))
@@ -44,8 +45,11 @@ class HS_texture(filename : String)  {
         }
     }
 
-    fun bind() {
-        glBindTexture(GL_TEXTURE_2D, id)
+    fun bind(sampler : Int) {
+        if((sampler >= 0) && (sampler <=31)) {
+            glActiveTexture(GL_TEXTURE0 + sampler)
+            glBindTexture(GL_TEXTURE_2D, id)
+        }
     }
 
 }

@@ -8,6 +8,7 @@ class Shader(filename : String) {
     private var vs : Int = 0
     private var fs : Int = 0
     init{
+        println("Hello Shader")
         program = glCreateProgram()
 
         vs = glCreateShader(GL_VERTEX_SHADER)
@@ -28,6 +29,7 @@ class Shader(filename : String) {
         glAttachShader(program, fs)
 
         glBindAttribLocation(program, 0, "vertices")
+        glBindAttribLocation(program, 1, "textures")
 
         glLinkProgram(program)
         if(glGetProgrami(program, GL_LINK_STATUS) != 1) {
@@ -38,6 +40,12 @@ class Shader(filename : String) {
         if(glGetProgrami(program, GL_VALIDATE_STATUS) != 1) {
             throw IllegalStateException(glGetShaderInfoLog(program))
         }
+    }
+
+    fun setUniform(name: String, value: Int) {
+        val location = glGetUniformLocation(program, name)
+        if(location != -1)
+            glUniform1i (location, value)
     }
 
     fun bind() {
