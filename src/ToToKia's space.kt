@@ -1,6 +1,6 @@
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL
-import org.lwjgl.opengles.GLES20.*
+import org.lwjgl.opengl.GL11.*
 
 fun render(win: Long){
     glClearColor(0.0f,1.0f,0.0f,1.0f)
