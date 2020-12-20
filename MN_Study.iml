@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/shaders" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -161,6 +162,19 @@
           <root url="jar://$MODULE_DIR$/lib/lwjgl-xxhash-sources.jar!/" />
           <root url="jar://$MODULE_DIR$/lib/lwjgl-yoga-sources.jar!/" />
           <root url="jar://$MODULE_DIR$/lib/lwjgl-zstd-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/joml-1.9.25.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/joml-jdk8-1.9.25.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/joml-1.9.25-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/joml-1.9.25-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

@@ -1,3 +1,5 @@
+import org.joml.Matrix4f
+import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL20.*
 import java.io.BufferedReader
 import java.io.File
@@ -46,6 +48,14 @@ class Shader(filename : String) {
         val location = glGetUniformLocation(program, name)
         if(location != -1)
             glUniform1i (location, value)
+    }
+
+    fun setUniform(name: String, value: Matrix4f) {
+        val location = glGetUniformLocation(program, name)
+        val buffer = BufferUtils.createFloatBuffer(16)
+        value.get(buffer)
+        if(location != -1)
+            glUniformMatrix4fv(location, false, buffer)
     }
 
     fun bind() {

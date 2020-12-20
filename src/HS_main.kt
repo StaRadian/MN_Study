@@ -1,3 +1,4 @@
+import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
@@ -6,6 +7,7 @@ import org.lwjgl.opengl.GL11.*
 fun main(){
     println("Hello")
     GLFWErrorCallback.createPrint()
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
 
@@ -43,6 +45,12 @@ fun main(){
     val shader = Shader("shader")
     val tex = HS_texture("./res/awesomeface.png")
 
+    val projection = Matrix4f().ortho2D(-640/2f, 640/2f, -480/2f, 480/2f)
+    val scale = Matrix4f().scale(128f)
+    val target = Matrix4f()
+
+    projection.mul(scale, target)
+
     while (!glfwWindowShouldClose(win)){
         if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
             glfwSetWindowShouldClose(win, true)
@@ -55,6 +63,7 @@ fun main(){
 
         shader.bind()
         shader.setUniform("sampler",0)
+        shader.setUniform("projection",target)
 
         tex.bind(0)
         model.render()
