@@ -1,11 +1,11 @@
 import org.joml.Matrix4f
+import org.joml.Vector3f
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
 
 fun main(){
-    println("Hello")
     GLFWErrorCallback.createPrint()
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)
     if(!glfwInit())
@@ -18,6 +18,8 @@ fun main(){
     glfwMakeContextCurrent(win)
 
     GL.createCapabilities()
+
+    val camera = Camera(640, 480)
 
     glEnable(GL_TEXTURE_2D)
 
@@ -44,14 +46,15 @@ fun main(){
     val model = HS_Model(vertices, texture, indices)
     val shader = Shader("shader")
     val tex = HS_texture("./res/awesomeface.png")
+    val scale = Matrix4f()
+        .translate(Vector3f(100f, 0f, 0f))
+        .scale(256f)
+    var target = Matrix4f()
 
-    val projection = Matrix4f().ortho2D(-640/2f, 640/2f, -480/2f, 480/2f)
-    val scale = Matrix4f().scale(128f)
-    val target = Matrix4f()
-
-    projection.mul(scale, target)
+    camera.setPosition(Vector3f(-100f, 0f, 0f))
 
     while (!glfwWindowShouldClose(win)){
+        target = scale
         if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
             glfwSetWindowShouldClose(win, true)
         }
@@ -63,7 +66,7 @@ fun main(){
 
         shader.bind()
         shader.setUniform("sampler",0)
-        shader.setUniform("projection",target)
+        shader.setUniform("projection",camera.getprojection().mul(target))
 
         tex.bind(0)
         model.render()

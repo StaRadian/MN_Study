@@ -6,11 +6,10 @@ import java.io.File
 import java.io.FileReader
 
 class Shader(filename : String) {
-    private var program : Int = 0
-    private var vs : Int = 0
-    private var fs : Int = 0
+    private var program : Int
+    private var vs : Int
+    private var fs : Int
     init{
-        println("Hello Shader")
         program = glCreateProgram()
 
         vs = glCreateShader(GL_VERTEX_SHADER)

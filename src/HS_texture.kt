@@ -6,16 +6,13 @@ import java.awt.image.BufferedImage
 
 
 class HS_texture(filename : String)  {
-    private var id : Int =0
-    private var width : Int = 0
-    private var height : Int = 0
+    private var id : Int = 0
+
     init {
-        println("Hello texture")
         kotlin.runCatching {
-            println("HS_tex")
             val bi: BufferedImage = ImageIO.read(File(filename))
-            width = bi.width
-            height = bi.height
+            val width = bi.width
+            val height = bi.height
 
             val pixels_raw = bi.getRGB(0,0, width, height, null, 0, width)
             val pixels = BufferUtils.createByteBuffer(width * height * 4)

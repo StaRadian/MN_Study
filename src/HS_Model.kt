@@ -4,14 +4,13 @@ import org.lwjgl.opengl.GL20.*
 import java.nio.FloatBuffer
 
 class HS_Model (vertices : FloatArray, tex_coords : FloatArray, indices : IntArray) {
-    private var draw_count : Int = 0
-    private var v_id : Int = 0
-    private var t_id : Int = 0
+    private var draw_count : Int
+    private var v_id : Int
+    private var t_id : Int
 
-    private var i_id : Int = 0
+    private var i_id : Int
 
     init{
-        println("Hello HS_Model")
         draw_count = indices.size
 
         v_id = glGenBuffers()
