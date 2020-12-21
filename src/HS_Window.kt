@@ -1,4 +1,10 @@
+import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFW.*
+import org.lwjgl.glfw.GLFWErrorCallback
+import org.lwjgl.glfw.GLFW.glfwSetErrorCallback
+
+
+
 
 class HS_Window {
     private var window : Long = 0
@@ -6,6 +12,17 @@ class HS_Window {
     private var width : Int = 0
     private var height : Int = 0
     private var fullscreen : Boolean = true
+
+    companion object {
+        fun setCallbacks() {
+            glfwSetErrorCallback(
+                object : GLFWErrorCallback() {
+                    override fun invoke(error: Int, description: Long) {
+                        throw IllegalStateException(GLFWErrorCallback.getDescription(description))
+                    }
+                })
+        }
+    }
 
     init {
         setSize(640, 480)

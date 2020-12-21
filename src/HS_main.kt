@@ -6,10 +6,12 @@ import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
 
 fun main(){
-    GLFWErrorCallback.createPrint()
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)
+    HS_Window.setCallbacks()
+
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
+
+
 
     val win = HS_Window()
     win.setSize(1920,1080);
