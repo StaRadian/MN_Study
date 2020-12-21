@@ -26,7 +26,7 @@ fun PopUpWithOneColor(){
 
 fun PopUpWithMultipleColors(){
     glfwInit()
-    val window = glfwCreateWindow(640,480, "ToToKia many colors", 0, 0)
+    val window = glfwCreateWindow(640,640, "ToToKia many colors", 0, 0)
 
     glfwShowWindow(window)
     glfwMakeContextCurrent(window)
@@ -35,19 +35,29 @@ fun PopUpWithMultipleColors(){
     while(!glfwWindowShouldClose(window)){
         glfwPollEvents()
         glClear(GL_COLOR_BUFFER_BIT)
-        glBegin(GL_QUADS)
+        glBegin(GL_POLYGON)
 
             glColor4f(1.0f,0.0f,0.0f,1.0f)
-            glVertex2f(-0.5f,0.5f)
-
-            glColor4f(0.0f,1.0f,0.0f,1.0f)
-            glVertex2f(0.5f,0.5f)
-
-            glColor4f(0.0f,0.0f,1.0f,1.0f)
-            glVertex2f(0.5f,-0.5f)
+            glVertex2f(0.8f,0.8f)
 
             glColor4f(1.0f,1.0f,1.0f,1.0f)
-            glVertex2f(-0.5f,-0.5f)
+            glVertex2f(0.3f,0.8f)
+
+            glColor4f(0.0f,0.0f,1.0f,1.0f)
+            glVertex2f(0.3f,0.6f)
+
+            glColor4f(0.0f,1.0f,0.0f,1.0f)
+            glVertex2f(0.4f,0.6f)
+
+            glColor4f(1.0f,1.0f,1.0f,1.0f)
+            glVertex2f(0.6f,0.4f)
+
+            glColor4f(1.0f,1.0f,1.0f,1.0f)
+            glVertex2f(0.6f,0.3f)
+
+            glColor4f(0.0f,1.0f,1.0f,1.0f)
+            glVertex2f(0.8f,0.3f)
+
         glEnd()
 
         glfwSwapBuffers(window)
