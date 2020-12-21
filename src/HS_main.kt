@@ -11,15 +11,12 @@ fun main(){
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
 
-    var win : Long = glfwCreateWindow(1000, 1000, "Hello", 0,0)
-
-    glfwShowWindow(win)
-
-    glfwMakeContextCurrent(win)
+    val win = HS_Window()
+    win.createWindow("HS_Game")
 
     GL.createCapabilities()
 
-    val camera = HS_Camera(1000, 1000)
+    val camera = HS_Camera(640, 480)
 
     glEnable(GL_TEXTURE_2D)
 
@@ -45,10 +42,10 @@ fun main(){
 
     val model = HS_Model(vertices, texture, indices)
     val shader = Shader("HS_shader")
-    val tex = HS_texture("./res/jojo_background.jpg")
+    val tex = HS_texture("./res/HL.png")
     val scale = Matrix4f()
         .translate(Vector3f(100f, 0f, 0f))
-        .scale(256f)
+        .scale(250f) // max 500?
     var target = Matrix4f()
 
     camera.setPosition(Vector3f(-100f, 0f, 0f))
@@ -62,7 +59,7 @@ fun main(){
     var unprocessed : Double = 0.0
 
 
-    while (!glfwWindowShouldClose(win)){
+    while (!win.shouldClose()){
         var can_render =false
 
         var time_2 = HS_Timer.getTime()
@@ -77,14 +74,16 @@ fun main(){
             can_render = true
 
             target = scale
+            /*
             if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
                 glfwSetWindowShouldClose(win, true)
             }
+            */
 
             glfwPollEvents()
             if(frame_time >= 1.0) {
                 frame_time = 0.0
-                //println("FPS: $frames")
+                println("FPS: $frames")
                 frames = 0
             }
         }
@@ -98,7 +97,8 @@ fun main(){
             model.render()
             tex.bind(0)
 
-            glfwSwapBuffers(win)
+            win.swapBuffers()
+
             frames++
         }
     }
