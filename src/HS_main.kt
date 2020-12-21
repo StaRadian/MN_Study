@@ -11,7 +11,7 @@ fun main(){
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
 
-    var win : Long = glfwCreateWindow(640, 480, "Hello", 0,0)
+    var win : Long = glfwCreateWindow(1000, 1000, "Hello", 0,0)
 
     glfwShowWindow(win)
 
@@ -19,7 +19,7 @@ fun main(){
 
     GL.createCapabilities()
 
-    val camera = HS_Camera(640, 480)
+    val camera = HS_Camera(1000, 1000)
 
     glEnable(GL_TEXTURE_2D)
 
@@ -45,7 +45,7 @@ fun main(){
 
     val model = HS_Model(vertices, texture, indices)
     val shader = Shader("HS_shader")
-    val tex = HS_texture("./res/awesomeface.png")
+    val tex = HS_texture("./res/jojo_background.jpg")
     val scale = Matrix4f()
         .translate(Vector3f(100f, 0f, 0f))
         .scale(256f)
@@ -84,7 +84,7 @@ fun main(){
             glfwPollEvents()
             if(frame_time >= 1.0) {
                 frame_time = 0.0
-                println("FPS: $frames")
+                //println("FPS: $frames")
                 frames = 0
             }
         }

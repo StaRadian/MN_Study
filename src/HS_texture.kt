@@ -19,7 +19,7 @@ class HS_texture(filename : String)  {
 
             for(i : Int in 0..width-1) {
                 for(j : Int in 0..height-1){
-                    val pixel = pixels_raw[i*width + j]
+                    val pixel = pixels_raw[i*height + j]
                     pixels.put((pixel.shr(16) and 0xFF).toByte())
                     pixels.put((pixel.shr(8) and 0xFF).toByte())
                     pixels.put((pixel and 0xFF).toByte())
