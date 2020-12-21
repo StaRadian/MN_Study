@@ -1,7 +1,7 @@
 import org.joml.Matrix4f
 import org.joml.Vector3f
 
-class Camera(width : Int, height : Int) {
+class HS_Camera(width : Int, height : Int) {
     private var position : Vector3f
     private var projection : Matrix4f
 

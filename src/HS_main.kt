@@ -19,7 +19,7 @@ fun main(){
 
     GL.createCapabilities()
 
-    val camera = Camera(640, 480)
+    val camera = HS_Camera(640, 480)
 
     glEnable(GL_TEXTURE_2D)
 
@@ -44,7 +44,7 @@ fun main(){
     )
 
     val model = HS_Model(vertices, texture, indices)
-    val shader = Shader("shader")
+    val shader = Shader("HS_shader")
     val tex = HS_texture("./res/awesomeface.png")
     val scale = Matrix4f()
         .translate(Vector3f(100f, 0f, 0f))
@@ -58,14 +58,14 @@ fun main(){
     var frame_time : Double = 0.0
     var frames = 0
 
-    var time = Timer.getTime()
+    var time = HS_Timer.getTime()
     var unprocessed : Double = 0.0
 
 
     while (!glfwWindowShouldClose(win)){
         var can_render =false
 
-        var time_2 = Timer.getTime()
+        var time_2 = HS_Timer.getTime()
         var passed = time_2 - time
         unprocessed += passed
         frame_time += passed
