@@ -1,28 +1,38 @@
 import org.lwjgl.glfw.GLFW.*
-import org.lwjgl.glfw.GLFWVidMode
 
 class HS_Window {
     private var window : Long = 0
 
     private var width : Int = 0
     private var height : Int = 0
+    private var fullscreen : Boolean = true
 
     init {
-        setSize(604, 480)
+        setSize(640, 480)
+        setFullscreen(false)
     }
 
     fun createWindow(title : String) {
-        window = glfwCreateWindow(width, height, title, 0, 0)
+        window = glfwCreateWindow(
+            width,
+            height,
+            title,
+            if(fullscreen) glfwGetPrimaryMonitor() else 0 ,
+            0)
 
         if(window == 0L)
             throw IllegalStateException("Failed to create widow!")
 
-        val vid = glfwGetVideoMode(glfwGetPrimaryMonitor())!!
-        glfwSetWindowPos(window,
-            (vid.width() - width)/ 2,
-            (vid.height() - height)/2)
 
-        glfwShowWindow(window)
+        if(!fullscreen) {
+            val vid = glfwGetVideoMode(glfwGetPrimaryMonitor())!!
+            glfwSetWindowPos(
+                window,
+                (vid.width() - width) / 2,
+                (vid.height() - height) / 2
+            )
+            glfwShowWindow(window)
+        }
 
         glfwMakeContextCurrent(window)
     }
@@ -35,17 +45,21 @@ class HS_Window {
         glfwSwapBuffers(window)
     }
 
+    fun setFullscreen(fullscreen : Boolean) {
+        this.fullscreen = fullscreen
+    }
+
     fun setSize(width : Int, height : Int) {
         this.width = width
         this.height = height
     }
 
-    fun getWidth() : Int{
-        return width
-    }
+    fun getWidth() : Int{ return width }
 
-    fun getHeight() : Int {
-        return height
-    }
+    fun getHeight() : Int { return height }
+
+    fun isFullscreen() : Boolean { return fullscreen }
+
+    fun getWindow() : Long {return window}
 
 }

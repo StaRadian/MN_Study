@@ -12,11 +12,13 @@ fun main(){
         throw IllegalStateException("glfwInit() error!")
 
     val win = HS_Window()
+    win.setSize(1920,1080);
+    win.setFullscreen(true)
     win.createWindow("HS_Game")
 
     GL.createCapabilities()
 
-    val camera = HS_Camera(640, 480)
+    val camera = HS_Camera(win.getWidth(), win.getHeight())
 
     glEnable(GL_TEXTURE_2D)
 
@@ -42,7 +44,7 @@ fun main(){
 
     val model = HS_Model(vertices, texture, indices)
     val shader = Shader("HS_shader")
-    val tex = HS_texture("./res/HL.png")
+    val tex = HS_texture("./res/awesomeface.png")
     val scale = Matrix4f()
         .translate(Vector3f(100f, 0f, 0f))
         .scale(250f) // max 500?
@@ -74,11 +76,11 @@ fun main(){
             can_render = true
 
             target = scale
-            /*
-            if(glfwGetKey(win, GLFW_KEY_A) == GL_TRUE) {
-                glfwSetWindowShouldClose(win, true)
+
+            if(glfwGetKey(win.getWindow(), GLFW_KEY_A) == GL_TRUE) {
+                glfwSetWindowShouldClose(win.getWindow(), true)
             }
-            */
+
 
             glfwPollEvents()
             if(frame_time >= 1.0) {
