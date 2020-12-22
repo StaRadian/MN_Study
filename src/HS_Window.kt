@@ -1,9 +1,6 @@
-import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.glfw.GLFW.glfwSetErrorCallback
-
-
 
 
 class HS_Window {
@@ -12,6 +9,8 @@ class HS_Window {
     private var width : Int = 0
     private var height : Int = 0
     private var fullscreen : Boolean = true
+
+    private lateinit var input : HS_Input
 
     companion object {
         fun setCallbacks() {
@@ -52,7 +51,9 @@ class HS_Window {
         }
 
         glfwMakeContextCurrent(window)
+        input = HS_Input(window)
     }
+
 
     fun shouldClose() : Boolean {
         return glfwWindowShouldClose(window) != false
@@ -71,12 +72,15 @@ class HS_Window {
         this.height = height
     }
 
+    fun update() {
+        input.update()
+        glfwPollEvents()
+    }
+
     fun getWidth() : Int{ return width }
-
     fun getHeight() : Int { return height }
-
     fun isFullscreen() : Boolean { return fullscreen }
-
-    fun getWindow() : Long {return window}
+    fun getWindow() : Long { return window }
+    fun getInput() : HS_Input { return input }
 
 }
