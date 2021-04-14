@@ -1,3 +1,5 @@
+package hs_io
+
 import java.lang.System.nanoTime
 
 class HS_Timer {

@@ -1,3 +1,5 @@
+package hs_io
+
 import org.lwjgl.glfw.GLFW.*
 
 class HS_Input(window: Long) {

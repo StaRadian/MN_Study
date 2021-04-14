@@ -1,3 +1,5 @@
+package hs_io
+
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.glfw.GLFW.glfwSetErrorCallback

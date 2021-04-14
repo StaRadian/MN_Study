@@ -1,9 +1,11 @@
+import hs_io.HS_Timer
+import hs_io.HS_Window
 import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.lwjgl.glfw.GLFW.*
-import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
+import hs_render.*
 
 fun main(){
     HS_Window.setCallbacks()
@@ -11,11 +13,9 @@ fun main(){
     if(!glfwInit())
         throw IllegalStateException("glfwInit() error!")
 
-
-
     val win = HS_Window()
     win.setSize(640,480);
-    //win.setFullscreen(true)
+    win.setFullscreen(false)
     win.createWindow("HS_Game")
 
     GL.createCapabilities()

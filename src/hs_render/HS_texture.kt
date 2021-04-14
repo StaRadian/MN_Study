@@ -1,3 +1,5 @@
+package hs_render
+
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL13.*
 import java.io.File

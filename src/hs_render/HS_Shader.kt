@@ -1,3 +1,5 @@
+package hs_render
+
 import org.joml.Matrix4f
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL20.*
